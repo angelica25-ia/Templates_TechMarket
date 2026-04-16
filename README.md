@@ -8,20 +8,12 @@ Para el desarrollo de este proyecto se utilizó una estrategia de control de ver
 - master: contiene la versión final del proyecto lista para entrega.
 - develop: rama de integración donde se consolidan los avances del equipo.
 - feature/: ramas individuales para el desarrollo de funcionalidades específicas.
-
-*Ejemplo de ramas utilizadas:*
-- feature/build-template
-- feature/test-template
-- feature/deploy-template
   
 *Flujo de trabajo*
-1. Cada integrante crea su rama desde develop.
-2. Se desarrollan los cambios de forma independiente.
-3. Se realiza un Pull Request hacia develop.
-4. Se revisan y consolidan los cambios.
-5. Finalmente, se integran a master como versión final.
-
-Este enfoque permitió mejorar la organización del trabajo, evitar conflictos y facilitar la colaboración entre los integrantes del equipo.
+1. Se desarrollan los cambios de forma independiente.
+2. Se realiza un Pull Request hacia develop.
+3. Se revisan y consolidan los cambios.
+4. Finalmente, se integran a master como versión final.
 
 # Estructura de templates CI/CD #
 
@@ -35,4 +27,3 @@ En esta carpeta se definieron los siguientes archivos:
 - template_test.yml: orientado a la ejecución de pruebas automatizadas.
 - template_deploy.yml: destinado al despliegue del sistema en distintos entornos.
 
-Estas plantillas no se ejecutan directamente desde GitHub Actions, ya que están diseñadas para ser reutilizadas mediante workflow_call en otros workflows. Esta estrategia permite estandarizar los procesos de integración y despliegue continuo, facilitando la reutilización, mantención y escalabilidad de los pipelines en distintos proyectos o equipos.
