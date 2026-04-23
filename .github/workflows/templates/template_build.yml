@@ -1,21 +1,32 @@
+# Plantilla estandarizada para construcción de aplicaciones Node.js
+# Versión: v1.0.0
 name: Template Build v1.0.0
 on:
   workflow_call:
     inputs:
       node-version:
         required: true
+        type: string
         default: '18'
       environment:
         required: true
+        type: string
+    outputs:
+      build-result:
+        description: 'Resultado del proceso de build'
+        value: ${{ jobs.build.result }}
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       APP_ENV: ${{ inputs.environment }}
     steps:
+    #Checkout - Acción externa (Item 1.2)
       - uses: actions/checkout@v4
+    #Setup Node - Acción externa
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
+    #Instalación y Build
       - run: npm install
       - run: npm run build
