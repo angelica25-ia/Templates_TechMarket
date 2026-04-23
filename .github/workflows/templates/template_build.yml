@@ -1,0 +1,48 @@
+# Plantilla estandarizada para construcción de aplicaciones Node.js
+# Versión: v1.0.0
+
+name: Template Build v1.0.0
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Versión de Node.js a utilizar"
+        required: true
+        type: string
+        default: '18'
+      environment:
+        description: "Ambiente de ejecución (dev, test, prod)"
+        required: true
+        type: string
+    outputs:
+      build-result:
+        description: "Resultado del proceso de build"
+        value: ${{ jobs.build.result }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Variables de entorno parametrizadas
+    env:
+      APP_ENV: ${{ inputs.environment }}
+
+    steps:
+      # Clona el repositorio (acción externa desde GitHub Marketplace)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configura Node.js según parámetro recibido
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      # Instala dependencias del proyecto
+      - name: Install dependencies
+        run: npm install
+
+      # Ejecuta el proceso de build
+      - name: Build project
+        run: npm run build

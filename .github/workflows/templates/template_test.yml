@@ -1,0 +1,41 @@
+# Plantilla estandarizada para ejecución de pruebas en TechMarket
+# Versión: v1.0.0
+
+name: Template Test v1.0.0
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Versión de Node.js a utilizar"
+        required: true
+        type: string
+        default: '18'
+      test-command:
+        description: "Comando a ejecutar para pruebas"
+        required: true
+        type: string
+        default: 'npm test'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clona el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configura Node.js según parámetro
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      # Instala dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Ejecuta pruebas
+      - name: Run tests
+        run: ${{ inputs.test-command }}
