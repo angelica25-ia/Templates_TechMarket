@@ -1,9 +1,12 @@
+# Plantilla estandarizada para ejecución de pruebas en TechMarket
+# Versión: v1.0.0
 name: Template Test v1.0.0
 on:
   workflow_call:
     inputs:
       test-command:
         required: true
+        type: string
         default: 'npm test'
 jobs:
   test:
