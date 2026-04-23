@@ -1,0 +1,24 @@
+# Plantilla estandarizada para el despliegue de aplicaciones en TechMarket
+# Versión: v1.0.0
+name: Template Deploy v1.0.0
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      region:
+        required: true
+        type: string
+        default: 'us-east-1'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    #Descarga del código fuente
+      - uses: actions/checkout@v4
+    #Configuración de credenciales
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ inputs.region }}
+      - run: echo "Deploy en ${{ inputs.environment }}"
