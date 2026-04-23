@@ -1,1 +1,21 @@
-
+name: Template Build v1.0.0
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        default: '18'
+      environment:
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm install
+      - run: npm run build
